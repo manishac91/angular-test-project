@@ -5,6 +5,7 @@
 <script type="text/javascript" src="scripts/angular.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
 <link rel="stylesheet" type="text/css" href="styles/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="styles/style.css">
 <title>App</title>
 </head>
 <body ng-app="TodoApp">
@@ -21,10 +22,25 @@
 			</form>
 		</div>
 	</div>
-	<div class="well well-lg" ng-controller="tasksController">
-	<ul>
-		<li ng-repeat="task in tasks track by $index">{{task}}</li>
-	</ul>
+	<div class="well well-lg col-sm-offset-3 col-sm-5" ng-controller="tasksController">
+		<div>
+			<div ng-repeat="task in tasks.data track by $index">
+				 <div class="row">
+		        	<input class="checkbox col-sm-1"  id="customId" ng-model="task.selected" type="checkbox" style="margin: 30 0 0 0" > 
+		  			<span ng-if="!task.isEditable" ng-class="{ 'strike-through': task.selected}" class="col-sm-9">
+		  				{{task.title}}	
+		  			</span>
+		  			<span ng-if="task.isEditable" class="col-sm-9">
+		  				<input id="input_val_{{task.id}}" class="form-control" type="text" value="{{task.title}}" ng-model="task.title">
+		  			</span>
+		  			<span>
+		  				<a href="" ng-if="!task.isEditable" ng-click="editTask(task)"><img src="images/256.png" height="20px;" class="" style="padding-right:10px;"></a>
+		  				<a href="" ng-if="task.isEditable" ng-click="saveTask(task)"><img src="images/images.jpg" height="20px;" class="" style="padding-right:10px;"></a>
+		  				<a href="" ng-click="removeTask($index)"><img src="images/88697813.jpg" height="20px;" class=""></a>
+		  			</span>
+	  			 </div>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
